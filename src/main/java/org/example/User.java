@@ -9,7 +9,7 @@ public class User {
     private boolean isAdmin;
     private List<Training> trainings;
 
-    public User(String username, String password) {
+    public User(String username, String password, boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
@@ -46,6 +46,10 @@ public class User {
 
     public List<Training> getTrainings() {
         return trainings;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
 }

@@ -16,8 +16,8 @@ public class TrainingDiary {
         users = new ArrayList<>();
     }
 
-    public void registerUser(String username, String password) {
-        User newUser = new User(username, password);
+    public void registerUser(String username, String password, boolean isAdmin) {
+        User newUser = new User(username, password, isAdmin);
         users.add(newUser);
         System.out.println("Пользователь " + username + " успешно зарегистрирован");
     }
@@ -48,7 +48,7 @@ public class TrainingDiary {
         if (loggedInUser == null) {
             System.out.println("Пользователь не авторизован");
         } else {
-            Training newTraining = new Training(type, date, duration, calories, additionalInfo);
+            Training newTraining = new Training(type, date, duration, calories, additionalInfo, loggedInUser.getUsername());
             trainingList.add(newTraining);
             loggedInUser.addTraining(newTraining);
             System.out.println(newTraining.getType() + " Тренировка успешно добавлена");
@@ -65,15 +65,36 @@ public class TrainingDiary {
         }
     }
 
-    public List<Training> getTrainings() {
-        if (loggedInUser != null) {
-            return new ArrayList<>(loggedInUser.getTrainings());
+//    public List<Training> getTrainings() {
+//        if (loggedInUser != null) {
+//            return new ArrayList<>(loggedInUser.getTrainings());
+//        }
+//        return new ArrayList<>();
+//    }
+
+    public List<Training> getUserTrainings() {
+        if (loggedInUser == null) {
+            System.out.println("Пользователь не авторизован");
+            return new ArrayList<>();
         }
-        return new ArrayList<>();
+        if (loggedInUser.isAdmin()) {
+            // Возвращает все тренировки для администратора
+            return trainingList;
+        } else {
+            // Возвращает только тренировки текущего пользователя
+            List<Training> userTrainings = new ArrayList<>();
+            for (Training training : trainingList) {
+                if (training.getUsername().equals(loggedInUser.getUsername())) {
+                    userTrainings.add(training);
+                }
+            }
+            return userTrainings;
+        }
     }
 
+
     public List<Training> getTrainingsSortedByDate() {
-        List<Training> sortedTrainings = getTrainings();
+        List<Training> sortedTrainings = getUserTrainings();
         sortedTrainings.sort(Comparator.comparing(Training::getDate));
         return sortedTrainings;
     }
@@ -119,5 +140,14 @@ public class TrainingDiary {
         }
         return false;
     }
+
+    public boolean isAdmin() {
+        if (loggedInUser == null) {
+            System.out.println("Пользователь не авторизован");
+            return false;
+        }
+        return loggedInUser.isAdmin();
+    }
+
 
 }
