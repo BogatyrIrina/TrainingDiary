@@ -66,4 +66,5 @@ public class Training {
                 ", additionalInfo='" + additionalInfo + '\'' +
                 '}';
     }
+
 }

@@ -11,7 +11,7 @@ public class Main {
         diary.registerUser("user2", "password2");
 
         // Авторизация пользователя
-        diary.login("user1", "password1");
+        diary.authorizeUser("user2", "password2");
         System.out.println("Пользователь авторизован: " + diary.isLoggedIn()); // для проверки, авторизован ли пользователь
 
 
@@ -23,7 +23,7 @@ public class Main {
         diary.displayTrainings();
 
         // Разлогин пользователя
-        diary.logout();
+        diary.logoutUser();
         System.out.println("Пользователь разлогинен: " + diary.isLoggedIn()); // для проверки, разлогинен ли пользователь
 
     }

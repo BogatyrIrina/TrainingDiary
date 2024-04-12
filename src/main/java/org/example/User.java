@@ -6,11 +6,13 @@ import java.util.List;
 public class User {
     private String username;
     private String password;
+    private boolean isAdmin;
     private List<Training> trainings;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
         this.trainings = new ArrayList<>();
     }
 
