@@ -7,8 +7,8 @@ public class Main {
         TrainingDiary diary = new TrainingDiary();
 
         // Регистрация пользователей
-        diary.registerUser("user1", "password1");
-        diary.registerUser("user2", "password2");
+        diary.registerUser("user1", "password1", true);
+        diary.registerUser("user2", "password2", false);
 
         // Авторизация пользователя
         diary.authorizeUser("user2", "password2");

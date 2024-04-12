@@ -8,13 +8,15 @@ public class Training {
     private int duration;
     private int calories;
     private String additionalInfo;
+    private String username;
 
-    public Training(String type, Date date, int duration, int calories, String additionalInfo) {
+    public Training(String type, Date date, int duration, int calories, String additionalInfo, String username) {
         this.type = type;
         this.date = date;
         this.duration = duration;
         this.calories = calories;
         this.additionalInfo = additionalInfo;
+        this.username = username;
     }
 
     public String getType() {
@@ -67,4 +69,8 @@ public class Training {
                 '}';
     }
 
+
+    public String getUsername() {
+        return username;
+    }
 }
